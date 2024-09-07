@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://fsksmlb34k2r"]
+
+[ext_resource type="Script" path="res://addons/scripts/ui/fade_ui.gd" id="3_7fphr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wpvt0"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvo5e"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[node name="UserInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="StaminaBar" type="ProgressBar" parent="." node_paths=PackedStringArray("TIMER")]
+unique_name_in_owner = true
+process_mode = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -11.0
+offset_right = 85.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_wpvt0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kvo5e")
+value = 85.0
+show_percentage = false
+script = ExtResource("3_7fphr")
+TIMER = NodePath("FadeoutTimer")
+
+[node name="FadeoutTimer" type="Timer" parent="StaminaBar"]
+one_shot = true

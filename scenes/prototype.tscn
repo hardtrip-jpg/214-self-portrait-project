@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvxmx675bohii"]
+
+[ext_resource type="PackedScene" uid="uid://dq11hndjwry0o" path="res://addons/scenes/player/player_controller.tscn" id="1_nleia"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ys063"]
+load_path = "res://.godot/imported/Photoreal_Ice_08-512x512.png-c4d12898ddda6ca5d6410f2cc3b1f5db.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8odm0"]
+albedo_texture = SubResource("CompressedTexture2D_ys063")
+
+[sub_resource type="Environment" id="Environment_6t66c"]
+background_mode = 1
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 1.0
+fog_depth_begin = 0.0
+fog_depth_end = 8.0
+
+[node name="Prototype" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_8odm0")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0102539, 0)
+size = Vector3(9.93555, 0.0429688, 12.1729)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6t66c")
+
+[node name="PlayerController" parent="." instance=ExtResource("1_nleia")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.950031, 0)
+
+[node name="Flashlight" parent="PlayerController/CameraController/Camera3D" index="0"]
+light_color = Color(0.344076, 0.344076, 0.344076, 1)
+light_energy = 16.0
+distance_fade_length = 1912.19
+spot_attenuation = 0.3
+spot_angle = 35.72
+
+[node name="AnimationPlayer" parent="PlayerController" index="2"]
+blend_times = [&"RESET", &"sprinting", 1.0, &"RESET", &"walking", 0.5, &"walking", &"jumpStart", 0.1, &"walking", &"sprinting", 0.5, &"walking", &"walking", 0.5]
+
+[editable path="PlayerController"]
