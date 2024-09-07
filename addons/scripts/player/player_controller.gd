@@ -68,6 +68,7 @@ func _update_camera(delta):
 func _ready():
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Global.player = self
 
 
 func _physics_process(delta):

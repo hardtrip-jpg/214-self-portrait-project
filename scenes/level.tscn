@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dm5ka7n7jsouv"]
+[gd_scene load_steps=12 format=3 uid="uid://dm5ka7n7jsouv"]
 
 [ext_resource type="PackedScene" uid="uid://dq11hndjwry0o" path="res://addons/scenes/player/player_controller.tscn" id="1_8ckby"]
 [ext_resource type="Texture2D" uid="uid://bnulo2vh3fpww" path="res://assets/level/street2.png" id="2_6552i"]
 [ext_resource type="Texture2D" uid="uid://ds2fkafggbllc" path="res://assets/level/fence1_a.png" id="2_r3f1s"]
 [ext_resource type="Texture2D" uid="uid://bqwxpmc3y1os6" path="res://assets/level/Stone_07-256x256.png" id="3_mdxhp"]
+[ext_resource type="PackedScene" uid="uid://cinpupcx8yuo8" path="res://scenes/enemy.tscn" id="5_ch1x5"]
+[ext_resource type="Environment" uid="uid://c0dnk75jw8aoi" path="res://resources/worldenvironment.tres" id="5_eeay6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iyie"]
 transparency = 1
@@ -33,7 +35,7 @@ size = Vector2(3, 16)
 [node name="Level" type="Node3D"]
 
 [node name="PlayerController" parent="." instance=ExtResource("1_8ckby")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.997795, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75031, 0.997795, 10.5018)
 
 [node name="AnimationPlayer" parent="PlayerController" index="2"]
 blend_times = [&"RESET", &"sprinting", 1.0, &"RESET", &"walking", 0.5, &"walking", &"jumpStart", 0.1, &"walking", &"sprinting", 0.5, &"walking", &"walking", 0.5]
@@ -222,5 +224,24 @@ mesh = SubResource("PlaneMesh_r7sya")
 skeleton = NodePath("../../CSGCombiner3D2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_eeay6")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("positions") instance=ExtResource("5_ch1x5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+positions = [NodePath("../Positions/1"), NodePath("../Positions/2"), NodePath("../Positions/3"), NodePath("../Positions/4")]
+
+[node name="Positions" type="Node3D" parent="."]
+
+[node name="1" type="Marker3D" parent="Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.1285, 0, -9.87673)
+
+[node name="2" type="Marker3D" parent="Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0042, 0, -38.1317)
+
+[node name="3" type="Marker3D" parent="Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.62651, 0, -28.755)
+
+[node name="4" type="Marker3D" parent="Positions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -12.8767)
 
 [editable path="PlayerController"]

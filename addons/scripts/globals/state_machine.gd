@@ -14,6 +14,7 @@ func _ready():
 	
 	await owner.ready
 	CURRENT_STATE.enter(null)
+	CURRENT_STATE.active = true
 
 func _process(delta):
 	CURRENT_STATE.update(delta)
@@ -26,7 +27,10 @@ func on_child_transition(new_state_name: StringName) -> void:
 	if new_state != null:
 		if new_state != CURRENT_STATE:
 			CURRENT_STATE.exit()
+			CURRENT_STATE.active = false
 			new_state.enter(CURRENT_STATE)
 			CURRENT_STATE = new_state
+			CURRENT_STATE.active = true
+			print(CURRENT_STATE)
 	else:
 		push_warning("State does not exist")
