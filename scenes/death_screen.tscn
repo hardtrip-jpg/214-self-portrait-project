@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://duf56npfdqqg2"]
+
+[ext_resource type="PackedScene" uid="uid://bsu3j3x6bbvmt" path="res://assets/enemy/enemy_animated.blend" id="1_kra4g"]
+[ext_resource type="Environment" uid="uid://c0dnk75jw8aoi" path="res://resources/worldenvironment.tres" id="2_2iu71"]
+
+[sub_resource type="Animation" id="Animation_f70q4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:fov")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [87.9044]
+}
+
+[sub_resource type="Animation" id="Animation_gufsp"]
+resource_name = "death_screen"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.309, 1.5708, 1.63133e-07), Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:fov")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [87.9044, 38.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8j72"]
+_data = {
+"RESET": SubResource("Animation_f70q4"),
+"death_screen": SubResource("Animation_gufsp")
+}
+
+[node name="DeathScreen" type="Node3D"]
+
+[node name="enemy_animated" parent="." instance=ExtResource("1_kra4g")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 0.633187, 2, 0)
+fov = 87.9044
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_2iu71")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c8j72")
+}
+autoplay = "death_screen"

@@ -14,7 +14,7 @@ func update(_delta : float):
 
 func physics_update(_delta : float):
 	enemy.move(_delta, speed)
-	if enemy.nav_agent.is_target_reached():
+	if enemy.current_target == enemy.next_target:
 		transition.emit("DetermineLocation")
 
 func body_enter(body : CharacterBody3D):
