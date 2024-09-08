@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://cinpupcx8yuo8"]
+[gd_scene load_steps=23 format=4 uid="uid://cinpupcx8yuo8"]
 
 [ext_resource type="Texture2D" uid="uid://bgpppx0asi27j" path="res://assets/enemy/textures/maintexture.png" id="1_e8pkw"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ffbwe"]
@@ -125,7 +125,7 @@ bind/24/bone = -1
 bind/24/pose = Transform3D(-37.6209, -29.4161, 87.8599, 91.773, 1.21113, 39.702, -12.7429, 95.5679, 26.5404, -24.7023, -66.7766, -7.87343)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfe2n"]
-radius = 3.3486
+radius = 4.45536
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mtas8"]
 random_pitch = 1.1
@@ -135,7 +135,10 @@ stream_0/stream = ExtResource("13_fiqbp")
 stream_1/stream = ExtResource("14_hh5tq")
 stream_2/stream = ExtResource("15_x5rwu")
 
-[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("animation", "area", "nav_agent", "mesh", "audio_voice")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_tjcyk"]
+radius = 0.825596
+
+[node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("animation", "area", "nav_agent", "mesh", "audio_voice", "got")]
 collision_layer = 2
 script = ExtResource("1_ffbwe")
 animation = NodePath("enemy_animated/AnimationPlayer")
@@ -143,6 +146,7 @@ area = NodePath("Area3D")
 nav_agent = NodePath("NavigationAgent3D")
 mesh = NodePath("enemy_animated")
 audio_voice = NodePath("Voice")
+got = NodePath("Got")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3ekim")
@@ -344,6 +348,7 @@ playback_default_blend_time = 0.3
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
 [node name="Area3D" type="Area3D" parent="."]
+monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_gfe2n")
@@ -388,3 +393,8 @@ doppler_tracking = 2
 max_distance = 25.0
 bus = &"Echo"
 doppler_tracking = 2
+
+[node name="Got" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Got"]
+shape = SubResource("SphereShape3D_tjcyk")

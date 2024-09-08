@@ -50,9 +50,6 @@ spot_angle = 29.144
 distance = 5.0
 weight = 0.3
 
-[node name="AnimationPlayer" parent="PlayerController" index="2"]
-blend_times = [&"RESET", &"sprinting", 1.0, &"RESET", &"walking", 0.5, &"walking", &"jumpStart", 0.1, &"walking", &"sprinting", 0.5, &"walking", &"walking", 0.5]
-
 [node name="UserInterface" parent="PlayerController" index="7"]
 visible = false
 
@@ -290,6 +287,5 @@ emission_angle_degrees = 60.0
 [node name="Ambience" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("7_gixkq")
 autoplay = true
-playback_type = 1
 
 [editable path="PlayerController"]
